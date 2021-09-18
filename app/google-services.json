@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "508005409580",
+    "project_id": "storereb-e8089",
+    "storage_bucket": "storereb-e8089.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:508005409580:android:b807c5c4803eb737288289",
+        "android_client_info": {
+          "package_name": "com.example.moviles_11sep21"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "508005409580-g4jib2ugpk8257h4e3kmdrd5qd7rhdae.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5b-IJq5AJjBM5B_Kd3mOyQKHrg00qg1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "508005409580-g4jib2ugpk8257h4e3kmdrd5qd7rhdae.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

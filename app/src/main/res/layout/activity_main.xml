@@ -68,6 +68,7 @@
         android:layout_marginTop="80dp"
         android:layout_marginEnd="8dp"
         android:background="#0F239F"
+        android:onClick="createUser"
         android:text="Entrar"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

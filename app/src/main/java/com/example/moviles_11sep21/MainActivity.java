@@ -1,5 +1,6 @@
 package com.example.moviles_11sep21;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -8,11 +9,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     //se declaran las variables
     EditText etEmail, etPass;
     Button btnLogin, btnTest;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         etPass = findViewById(R.id.etPass);
         btnLogin = findViewById(R.id.btnLogin);
         btnTest = findViewById(R.id.btnTest);
-        btnTest.setOnClickListener(this);//que este pendiente del evento click aqui mismo.
-        btnLogin.setOnClickListener(this);
+        //btnTest.setOnClickListener(this);//que este pendiente del evento click aqui mismo.
+        //btnLogin.setOnClickListener(this);
     }
     //metodo
     public void login(){
@@ -51,5 +62,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
                 break;
         }//se hace un caso y el selector es el id del boton que va a ejecutar la accion con getID obtiene el id del boton qu hace click
+    }
+
+    //metodo para agregar informacion a firebase
+    public  void createUser(View view){
+        Map<String, Object> userData = new HashMap<>();
+        userData.put("email","cursoscesde@gmail.com");
+        userData.put("password","123456");
+
+
+        db.collection("users")
+                .add(userData)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        Toast.makeText(getApplicationContext(), "Usuario agregado", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //Log.w(TAG, "Error adding document", e);
+                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
     }
 }
