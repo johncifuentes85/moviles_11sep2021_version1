@@ -79,8 +79,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //metodo para agregar informacion a firebase
     public  void createUser(View view){
         Map<String, Object> userData = new HashMap<>();
-        userData.put("email","cursoscesde@gmail.com");
-        userData.put("password","123456");
+        String email = etEmail.getText().toString();//trae el valor de campo email
+        String pass = etPass.getText().toString();
+
+        userData.put("email",email); // se envia la informacion
+        userData.put("password",pass);
 
 
         db.collection("users")
