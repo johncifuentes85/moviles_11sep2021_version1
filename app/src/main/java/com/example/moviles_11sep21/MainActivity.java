@@ -1,10 +1,12 @@
 package com.example.moviles_11sep21;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +16,10 @@ import com.example.moviles_11sep21.databinding.ActivityMainBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         View view =mainBinding.getRoot();
         setContentView(view);
-
+        realtimeData();
         //etEmail = findViewById(R.id.etEmail);
         //etPass = findViewById(R.id.etPass);
         //btnLogin = findViewById(R.id.btnLogin);
@@ -79,8 +84,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //metodo para agregar informacion a firebase
     public  void createUser(View view){
         Map<String, Object> userData = new HashMap<>();
-        String email = etEmail.getText().toString();//trae el valor de campo email
-        String pass = etPass.getText().toString();
+        String email = mainBinding.etEmail.getText().toString();//trae el valor de campo email
+        String pass = mainBinding.etPass.getText().toString();
 
         userData.put("email",email); // se envia la informacion
         userData.put("password",pass);
@@ -103,5 +108,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 });
 
+    }
+
+    public void  realtimeData(){
+        final DocumentReference docRef = db.collection("users")
+                .document("y4upRRYx1vjsSsXBU4Vw");
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value,
+                                @Nullable FirebaseFirestoreException error) {
+                if (error != null) {
+                    Log.w("Error data", "Listen failed.", error);
+                    return;
+                }
+
+                if (value != null && value.exists()) {
+                    Log.d("Snapshop", "Current data: " + value.getData());
+                } else {
+                    Log.d("Snapshop", "Current data: null");
+                }
+            }
+        });
     }
 }
