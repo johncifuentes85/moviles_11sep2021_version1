@@ -123,6 +123,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
                 if (value != null && value.exists()) {
+                    Map<String, Object> data = value.getData();
+
+                    //Log.d("Snapshop", "Current data: " + data.getOrDefault("email","").toString());
                     Log.d("Snapshop", "Current data: " + value.getData());
                 } else {
                     Log.d("Snapshop", "Current data: null");
