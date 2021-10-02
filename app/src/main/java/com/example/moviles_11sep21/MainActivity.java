@@ -3,12 +3,14 @@ package com.example.moviles_11sep21;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.moviles_11sep21.databinding.ActivityMainBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -20,8 +22,11 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     //se declaran las variables
-    EditText etEmail, etPass;
-    Button btnLogin, btnTest;
+    //EditText etEmail, etPass;
+    //Button btnLogin, btnTest;
+
+    // con esta linea hacemos el view binding
+    private ActivityMainBinding mainBinding;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -29,17 +34,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        etEmail = findViewById(R.id.etEmail);
-        etPass = findViewById(R.id.etPass);
-        btnLogin = findViewById(R.id.btnLogin);
-        btnTest = findViewById(R.id.btnTest);
+        // con esta linea hacemos el view binding asi la llamamos
+        mainBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view =mainBinding.getRoot();
+        setContentView(view);
+
+        //etEmail = findViewById(R.id.etEmail);
+        //etPass = findViewById(R.id.etPass);
+        //btnLogin = findViewById(R.id.btnLogin);
+        //btnTest = findViewById(R.id.btnTest);
         //btnTest.setOnClickListener(this);//que este pendiente del evento click aqui mismo.
         //btnLogin.setOnClickListener(this);
     }
     //metodo
     public void login(){
-        String email = etEmail.getText().toString();//trae el valor de campo email
-        String pass = etPass.getText().toString();
+        //String email = etEmail.getText().toString();//trae el valor de campo email
+        // asi llamamos a los id con view biding
+        String email = mainBinding.etEmail.getText().toString();//trae el valor de campo email
+        String pass = mainBinding.etPass.getText().toString();
         Toast.makeText(this, "email + pass", Toast.LENGTH_SHORT).show();
         if (email.equals("")){
             Toast.makeText(this, "Email Vacio", Toast.LENGTH_SHORT).show();

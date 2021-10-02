@@ -8,10 +8,10 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_width="126dp"
+        android:layout_height="114dp"
         android:layout_marginTop="60dp"
-        android:gravity="center|center_vertical"
+        android:gravity="center|center_horizontal"
         android:text="Correo electronico"
         android:textColor="#595A5E"
         android:textSize="20sp"
